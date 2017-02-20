@@ -1,31 +1,41 @@
 #include <SketchUpAPI/sketchup.h>
 #include <iostream>
+#include <ostream>
 #include <string>
 //#include <unordered_map>
 #include <vector>
 #include <cassert>
 //#include <algorithm>
-//#include <iterator> // back_inserter
+#include <iterator> // back_inserter
 #include "type_name.h"
 #include "output_sketchup_error.h"
 
-int32_t entity_get_id(SUEntityRef& const entity)
+int32_t entity_get_id(SUEntityRef& entity)
 {
   int32_t id = 0;
   SUEntityGetID(entity, &id);
   return id;
 }
 
-int64_t entity_get_persistent_id(SUEntityRef& entity)
+int64_t entity_get_persistent_id(const SUEntityRef& entity)
 {
   int64_t id = 0;
   SUEntityGetPersistentID(entity, &id);
   return id;
 }
 
-std::ostream& operator<< (std::ostream& os, SUEntityRef& obj) {
-  os << "<" << type_name(obj) << ":" << entity_get_persistent_id(obj) << ">";
+std::ostream& operator<< (std::ostream& os, const SUEntityRef&  obj) {
+  os << "#<" << type_name(obj) << ":" << entity_get_persistent_id(obj) << ">";
   return os;
+}
+
+
+std::ostream& operator<< (std::ostream& out, std::vector<SUEntityRef>& v) {
+  out << "[";
+  std::ostream_iterator<SUEntityRef> out_it(out, ", ");
+  std::copy(v.begin(), v.end(), out_it);
+  out << "]";// << std::endl;
+  return out;
 }
 
 void entities_get_faces(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
@@ -96,12 +106,46 @@ void entities_get_instances(SUEntitiesRef& entities, std::vector<SUEntityRef>& v
   }
 }
 
+void entities_get_guide_points(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
+{
+  size_t len = 0;
+  SUEntitiesGetNumGuidePoints(entities, &len);
+  if (len > 0) {
+    std::vector<SUGuidePointRef> cpoints(len);
+    size_t num = 0;
+    SUEntitiesGetGuidePoints(entities, len, &cpoints[0], &num);
+    if (num > 0) {
+      for (auto cpoint : cpoints) {
+        v.push_back(SUGuidePointToEntity(cpoint));
+      }
+    }
+  }
+}
+
+void entities_get_guide_lines(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
+{
+  size_t len = 0;
+  SUEntitiesGetNumGuideLines(entities, &len);
+  if (len > 0) {
+    std::vector<SUGuideLineRef> clines(len);
+    size_t num = 0;
+    SUEntitiesGetGuideLines(entities, len, &clines[0], &num);
+    if (num > 0) {
+      for (auto cline : clines) {
+        v.push_back(SUGuideLineToEntity(cline));
+      }
+    }
+  }
+}
+
 void entities_get_entities(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
 {
   entities_get_edges(entities, v);
   entities_get_faces(entities, v);
   entities_get_groups(entities, v);
   entities_get_instances(entities, v);
+  entities_get_guide_points(entities, v);
+  entities_get_guide_lines(entities, v);
 }
 
 void get_entities(SUModelRef model, std::vector<SUEntityRef>& v) {
@@ -147,14 +191,15 @@ int main(int argc, char* argv[])
     std::vector<SUEntityRef> ents(0);
     get_entities(model, ents);
     std::cout << "Entities for Model:" << std::endl;
-    for (auto& ent : ents) {
+    /*for (auto& ent : ents) {
       std::cout << ent << " ";
-    }
+    }*/
+    std::cout << ents;
     std::cout << "\nModel contains: " << ents.size() << " entities." << std::endl;
 
     // Groups
     std::vector<SUEntityRef> groups(0);
-    for (auto& const ent : ents) {
+    for (auto& ent : ents) {
       if (SUEntityGetType(ent) == SURefType_Group) {
         groups.push_back(ent);
       }
@@ -164,9 +209,7 @@ int main(int argc, char* argv[])
       std::cout << "Entities for " << ent << ":\n";
       ents.clear();
       get_entities(SUGroupFromEntity(ent), ents);
-      for (auto& ent : ents) {
-        std::cout << ent << " ";
-      }
+      std::cout << ents << " ";
       std::cout << "\nGroup " << ent << " contains " << ents.size() << " entities." << std::endl;
     }
 
