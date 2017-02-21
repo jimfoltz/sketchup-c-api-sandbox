@@ -6,7 +6,7 @@
 #include <vector>
 #include <cassert>
 //#include <algorithm>
-#include <iterator> // back_inserter
+#include <iterator> // ostream_inserter
 #include "type_name.h"
 #include "output_sketchup_error.h"
 
