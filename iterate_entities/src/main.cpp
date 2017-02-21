@@ -48,7 +48,7 @@ void entities_get_faces(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
     SUEntitiesGetFaces(entities, len, &faces[0], &num);
     if (num > 0) {
       for (auto face : faces) {
-        SUEntityRef ent{ SU_INVALID };
+        SUEntityRef ent = SU_INVALID;
         ent = SUFaceToEntity(face);
         v.push_back(ent);
       }
@@ -66,7 +66,7 @@ void entities_get_edges(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
     SUEntitiesGetEdges(entities, false, len, &edges[0], &num);
     if (num > 0) {
       for (auto edge : edges) {
-        SUEntityRef ent{ SU_INVALID };
+        SUEntityRef ent = SU_INVALID;
         ent = SUEdgeToEntity(edge);
         v.push_back(ent);
       }
@@ -149,21 +149,21 @@ void entities_get_entities(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
 }
 
 void get_entities(SUModelRef model, std::vector<SUEntityRef>& v) {
-  SUEntitiesRef entities{ SU_INVALID };
+  SUEntitiesRef entities = SU_INVALID;
   SUModelGetEntities(model, &entities);
   entities_get_entities(entities, v);
 }
 
 void get_entities(SUGroupRef group, std::vector<SUEntityRef>& v)
 {
-  SUEntitiesRef entities{ SU_INVALID };
+  SUEntitiesRef entities = SU_INVALID;
   SUGroupGetEntities(group, &entities);
   entities_get_entities(entities, v);
 }
 
 void get_entities(SUComponentDefinitionRef definition, std::vector<SUEntityRef>& v)
 {
-  SUEntitiesRef entities{ SU_INVALID };
+  SUEntitiesRef entities = SU_INVALID;
   SUComponentDefinitionGetEntities(definition, &entities);
   entities_get_entities(entities, v);
 }
@@ -179,7 +179,7 @@ int main(int argc, char* argv[])
 
     SUInitialize();
     SUResult result{ SU_ERROR_NONE };
-    SUModelRef model{ SU_INVALID };
+    SUModelRef model = SU_INVALID;
 
     result = SUModelCreateFromFile(&model, filename.c_str());
 
