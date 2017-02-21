@@ -24,11 +24,10 @@ int64_t entity_get_persistent_id(const SUEntityRef& entity)
   return id;
 }
 
-std::ostream& operator<< (std::ostream& os, const SUEntityRef&  obj) {
+std::ostream& operator<< (std::ostream& os, const SUEntityRef& obj) {
   os << "#<" << type_name(obj) << ":" << entity_get_persistent_id(obj) << ">";
   return os;
 }
-
 
 std::ostream& operator<< (std::ostream& out, std::vector<SUEntityRef>& v) {
   out << "[";
@@ -191,9 +190,6 @@ int main(int argc, char* argv[])
     std::vector<SUEntityRef> ents(0);
     get_entities(model, ents);
     std::cout << "Entities for Model:" << std::endl;
-    /*for (auto& ent : ents) {
-      std::cout << ent << " ";
-    }*/
     std::cout << ents;
     std::cout << "\nModel contains: " << ents.size() << " entities." << std::endl;
 
