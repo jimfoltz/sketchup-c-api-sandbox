@@ -137,6 +137,70 @@ void entities_get_guide_lines(SUEntitiesRef& entities, std::vector<SUEntityRef>&
   }
 }
 
+void entities_get_dimensions(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
+{
+  size_t len = 0;
+  SUEntitiesGetNumDimensions(entities, &len);
+  if (len > 0) {
+    std::vector<SUDimensionRef> dims(len);
+    size_t num = 0;
+    SUEntitiesGetDimensions(entities, len, &dims[0], &num);
+    if (num > 0) {
+      for (auto dim : dims) {
+        v.push_back(SUDimensionToEntity(dim));
+      }
+    }
+  }
+}
+
+void entities_get_images(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
+{
+  size_t len = 0;
+  SUEntitiesGetNumImages(entities, &len);
+  if (len > 0) {
+    std::vector<SUImageRef> images(len);
+    size_t num = 0;
+    SUEntitiesGetImages(entities, len, &images[0], &num);
+    if (num > 0) {
+      for (auto image : images) {
+        v.push_back(SUImageToEntity(image));
+      }
+    }
+  }
+}
+
+void entities_get_section_planes(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
+{
+  size_t len = 0;
+  SUEntitiesGetNumSectionPlanes(entities, &len);
+  if (len > 0) {
+    std::vector<SUSectionPlaneRef> planes(len);
+    size_t num = 0;
+    SUEntitiesGetSectionPlanes(entities, len, &planes[0], &num);
+    if (num > 0) {
+      for (auto plane : planes) {
+        v.push_back(SUSectionPlaneToEntity(plane));
+      }
+    }
+  }
+}
+
+void entities_get_polyline3ds(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
+{
+  size_t len = 0;
+  SUEntitiesGetNumPolyline3ds(entities, &len);
+  if (len > 0) {
+    std::vector<SUPolyline3dRef> plines(len);
+    size_t num = 0;
+    SUEntitiesGetPolyline3ds(entities, len, &plines[0], &num);
+    if (num > 0) {
+      for (auto pline : plines) {
+        v.push_back(SUPolyline3dToEntity(pline));
+      }
+    }
+  }
+}
+
 void entities_get_entities(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
 {
   entities_get_edges(entities, v);
@@ -145,6 +209,10 @@ void entities_get_entities(SUEntitiesRef& entities, std::vector<SUEntityRef>& v)
   entities_get_instances(entities, v);
   entities_get_guide_points(entities, v);
   entities_get_guide_lines(entities, v);
+  entities_get_dimensions(entities, v);
+  entities_get_section_planes(entities, v);
+  entities_get_images(entities, v);
+  entities_get_polyline3ds(entities, v);
 }
 
 void get_entities(SUModelRef model, std::vector<SUEntityRef>& v) {
