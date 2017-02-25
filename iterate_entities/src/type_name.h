@@ -1,3 +1,6 @@
+#ifndef _TYPE_NAME_H
+#define _TYPE_NAME_H
+
 #include <cassert>
 #include <string>
 #include <SketchUpAPI/model/defs.h>
@@ -52,3 +55,5 @@ std::string type_name(SUEntityRef const &entity) {
   }
   return str;
 }
+
+#endif
