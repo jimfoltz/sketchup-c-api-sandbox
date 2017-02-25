@@ -6,7 +6,7 @@ message("\nUsing SketchUp SDK " $ENV{SKETCHUP_SDK})
 
 find_path(SKETCHUP_INCLUDE_DIR SketchUpAPI/sketchup.h $ENV{SKETCHUP_SDK}/headers)
 find_library(SKETCHUP_LIBRARY sketchupapi.lib $ENV{SKETCHUP_SDK}/binaries/sketchup/x64)
-find_file(SKETCHUP_DLL sketchupapi.dll $ENV{SKETCHUP_SDK}/binaries/sketchup/x64)
+find_file(SKETCHUP_DLL SketchUpAPI.dll $ENV{SKETCHUP_SDK}/binaries/sketchup/x64)
 
 add_executable(main src/main.cpp src/type_name.h src/output_sketchup_error.h)
 

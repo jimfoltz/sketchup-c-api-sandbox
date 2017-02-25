@@ -4,11 +4,93 @@
 #include <string>
 //#include <unordered_map>
 #include <vector>
-#include <cassert>
+//#include <cassert>
 //#include <algorithm>
 #include <iterator> // ostream_inserter
+#include <sstream>
 #include "type_name.h"
 #include "output_sketchup_error.h"
+
+class Face {
+public:
+  Face(SUFaceRef f) {}
+  Face() {}
+};
+//class Model;
+
+class Entities {
+public:
+  Entities(SUModelRef m) {
+    assert(SUIsValid(m) == true);
+    model_ref = m;
+    SUModelGetEntities(model_ref, &_entities);
+  }
+  std::vector<Face> faces()
+  {
+    std::vector<Face> face_list(0);
+    size_t count = 0;
+    SUEntitiesGetNumFaces(_entities, &count);
+    if (count > 0) {
+      std::vector<SUFaceRef> face_refs(count);
+      size_t n = 0;
+      SUEntitiesGetFaces(_entities, count, &face_refs[0], &n);
+      if (n > 0) {
+        for (auto face_ref : face_refs) {
+          face_list.push_back(Face(face_ref));
+        }
+      }
+    }
+    return face_list;
+  }
+private:
+  SUEntitiesRef _entities;
+  SUModelRef model_ref;
+};
+
+class Model {
+public:
+  static Model create() {
+    Model m;
+    return m;
+  }
+
+  static Model create(std::string path)
+  {
+    Model m;
+    m.create_from_file(path);
+    return m;
+  }
+
+  Entities entities()
+  {
+    Entities e(model_ref);
+    return e;
+  }
+
+  std::string version()
+  {
+    int major{ 0 };
+    int minor{ 0 };
+    int build{ 0 };
+    SUModelGetVersion(model_ref, &major, &minor, &build);
+    std::ostringstream os;
+    os << major << "." << minor << "." << build;
+    return os.str();
+  }
+
+private:
+  void create_from_file(std::string filename) {
+    SUModelRef model = SU_INVALID;
+    SUResult res = SU_ERROR_NONE;
+    SUModelCreateFromFile(&model, filename.c_str());
+    assert(res == SU_ERROR_NONE);
+    model_ref = model;
+  }
+
+  SUModelRef model_ref;
+};
+
+
 
 int32_t entity_get_id(SUEntityRef& entity)
 {
@@ -237,50 +319,54 @@ void get_entities(SUComponentDefinitionRef definition, std::vector<SUEntityRef>&
 
 int main(int argc, char* argv[])
 {
-  try {
-    if (argc != 2) {
-      std::cout << "Usage: main.exe filename.skp" << std::endl;
-      return EXIT_FAILURE;
-    }
-    std::string filename = argv[1];
+  using std::cout;
 
-    SUInitialize();
-    SUResult result{ SU_ERROR_NONE };
-    SUModelRef model = SU_INVALID;
-
-    result = SUModelCreateFromFile(&model, filename.c_str());
-
-    int major = 0, minor = 0, build = 0;
-    result = SUModelGetVersion(model, &major, &minor, &build);
-    std::cout << "Model Version: " << major << "." << minor << "." << build << std::endl;
-
-    // List Model entities
-    std::vector<SUEntityRef> ents(0);
-    get_entities(model, ents);
-    std::cout << "Entities for Model:" << std::endl;
-    std::cout << ents;
-    std::cout << "\nModel contains: " << ents.size() << " entities." << std::endl;
-
-    // Groups
-    std::vector<SUEntityRef> groups(0);
-    for (auto& ent : ents) {
-      if (SUEntityGetType(ent) == SURefType_Group) {
-        groups.push_back(ent);
-      }
-    }
-    std::cout << "Model contains " << groups.size() << " Groups." << std::endl;
-    for (auto& ent : groups) {
-      std::cout << "Entities for " << ent << ":\n";
-      ents.clear();
-      get_entities(SUGroupFromEntity(ent), ents);
-      std::cout << ents << " ";
-      std::cout << "\nGroup " << ent << " contains " << ents.size() << " entities." << std::endl;
-    }
-
-    SUTerminate();
-    return 0;
+  if (argc != 2) {
+    std::cout << "Usage: main.exe filename.skp" << std::endl;
+    return EXIT_FAILURE;
   }
-  catch (const std::exception& e) {
-    std::cerr << "exception caught: " << e.what() << std::endl;
-  }
+  std::string filename = argv[1];
+
+  SUInitialize();
+
+  auto model = Model::create(filename);
+
+  cout << model.version() << std::endl;
+
+  auto ents = model.entities();
+
+  auto faces = ents.faces();
+
+  cout << "Faces: " << faces.size() << std::endl;
+
+  /*int major = 0, minor = 0, build = 0;
+  result = SUModelGetVersion(model, &major, &minor, &build);
+  std::cout << "Model Version: " << major << "." << minor << "." << build << std::endl;*/
+
+  //// List Model entities
+  //std::vector<SUEntityRef> ents(0);
+  //model.get_entities(model, ents);
+  //std::cout << "Entities for Model:" << std::endl;
+  //std::cout << ents;
+  //std::cout << "\nModel contains: " << ents.size() << " entities." << std::endl;
+
+  //// Groups
+  //std::vector<SUEntityRef> groups(0);
+  //for (auto& ent : ents) {
+  //  if (SUEntityGetType(ent) == SURefType_Group) {
+  //    groups.push_back(ent);
+  //  }
+  //}
+  //std::cout << "Model contains " << groups.size() << " Groups." << std::endl;
+  //for (auto& ent : groups) {
+  //  std::cout << "Entities for " << ent << ":\n";
+  //  ents.clear();
+  //  get_entities(SUGroupFromEntity(ent), ents);
+  //  std::cout << ents << " ";
+  //  std::cout << "\nGroup " << ent << " contains " << ents.size() << " entities." << std::endl;
+  //}
+
+  SUTerminate();
+  return 0;
+
 }
