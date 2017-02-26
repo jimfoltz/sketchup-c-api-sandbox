@@ -1,14 +1,14 @@
-#ifndef _MODEL_H
-#define _MODEL_H
+#pragma once
 
 #include <SketchUpAPI/sketchup.h>
 #include <string>
 
-#include "face.h"
 #include "entities.h"
 
 class Model {
+
 public:
+
   static Model create() {
     Model m;
     return m;
@@ -27,7 +27,7 @@ public:
     return e;
   }
 
-  std::string version()
+  std::string version() const
   {
     int major{ 0 };
     int minor{ 0 };
@@ -39,6 +39,9 @@ public:
   }
 
 private:
+
+  SUModelRef model_ref;
+  
   void create_from_file(std::string filename) {
     SUModelRef model = SU_INVALID;
     SUResult res = SU_ERROR_NONE;
@@ -47,7 +50,4 @@ private:
     model_ref = model;
   }
 
-  SUModelRef model_ref;
 };
-
-#endif

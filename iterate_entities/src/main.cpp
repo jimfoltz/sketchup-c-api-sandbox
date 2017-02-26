@@ -18,6 +18,7 @@
 int main(int argc, char* argv[])
 {
   using std::cout;
+  using std::endl;
 
   if (argc != 2) {
     std::cout << "Usage: main.exe filename.skp" << std::endl;
@@ -28,18 +29,16 @@ int main(int argc, char* argv[])
   SUInitialize();
 
   auto model = Model::create(filename);
-
   cout << model.version() << std::endl;
 
   auto ents = model.entities();
 
   auto faces = ents.faces();
+  cout << "Faces: " << faces.size() << endl;
 
-  cout << "Faces: " << faces.size() << std::endl;
+  auto edges = ents.edges();
+  cout << "Edges: " << edges.size() << endl;
 
-  /*int major = 0, minor = 0, build = 0;
-  result = SUModelGetVersion(model, &major, &minor, &build);
-  std::cout << "Model Version: " << major << "." << minor << "." << build << std::endl;*/
 
   //// List Model entities
   //std::vector<SUEntityRef> ents(0);

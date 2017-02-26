@@ -1,10 +1,8 @@
-#ifndef _FACE_H
-#define _FACE_H
+#pragma once
 
 class Face {
-	public:
-		Face(SUFaceRef f) {}
-		Face() {}
+public:
+    Face(SUFaceRef f) {}
+    Face() {}
 };
 
-#endif

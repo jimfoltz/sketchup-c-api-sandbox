@@ -1,5 +1,4 @@
-#ifndef _TYPE_NAME_H
-#define _TYPE_NAME_H
+#pragma once
 
 #include <cassert>
 #include <string>
@@ -56,4 +55,3 @@ std::string type_name(SUEntityRef const &entity) {
   return str;
 }
 
-#endif
