@@ -5,7 +5,7 @@
 #include <SketchUpAPI/model/defs.h>
 #include <SketchUpAPI/model/entity.h>
 
-std::string type_name(SUEntityRef const &entity) {
+std::string gtype_name(const SUEntityRef& entity) {
   SURefType t = SUEntityGetType(entity);
   assert(t != SURefType_Unknown);
   std::string str = "";

@@ -10,7 +10,7 @@ class Model {
 public:
 
   static Model create() {
-    Model m;
+    Model  m;
     return m;
   }
 
@@ -40,7 +40,7 @@ public:
 
 private:
 
-  SUModelRef model_ref;
+   SUModelRef model_ref;
   
   void create_from_file(std::string filename) {
     SUModelRef model = SU_INVALID;
