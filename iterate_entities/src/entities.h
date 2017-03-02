@@ -9,55 +9,25 @@
 
 
 class Entities {
+private:
+    SUEntitiesRef _ref;
+    SUModelRef model_ref;
+    typedef std::vector<Entity> EntityList;
+    void fill_faces(EntityList&);
+    void fill_edges(EntityList&);
 
 public:
 
-    Entities(SUModelRef m) {
-        assert(SUIsValid(m) == true);
-        model_ref = m;
-        SUModelGetEntities(model_ref, &_entities);
-    }
+    Entities(SUModelRef m);
+    //EntityList _entities;
+    std::vector<Face> faces() const;
+    std::vector<Edge> edges() const;
 
-    std::vector<Face> faces() const
-    {
-        std::vector<Face> face_list(0);
-        size_t count = 0;
-        SUEntitiesGetNumFaces(_entities, &count);
-        if (count > 0) {
-            std::vector<SUFaceRef> face_refs(count);
-            size_t n = 0;
-            SUEntitiesGetFaces(_entities, count, &face_refs[0], &n);
-            if (n > 0) {
-                for (auto face_ref : face_refs) {
-                    face_list.push_back(Face(face_ref));
-                }
-            }
-        }
-        return face_list;
-    }
-
-    std::vector<Edge> edges() const
-    {
-        std::vector<Edge> list(0);
-        size_t count = 0;
-        SUEntitiesGetNumEdges(_entities, false, &count);
-        if (count > 0) {
-            std::vector<SUEdgeRef> refs(count);
-            size_t n = 0;
-            SUEntitiesGetEdges(_entities, false, count, &refs[0], &n);
-            if (n > 0) {
-                for (auto ref : refs) {
-                    list.push_back(Edge(ref));
-                }
-            }
-        }
-        return list;
-    }
-
-private:
-
-    SUEntitiesRef _entities;
-    SUModelRef model_ref;
-
+    // 
+    EntityList all();
+    //typedef EntityList::iterator iterator;
+    //typedef EntityList::const_iterator const_iterator;
+    //iterator begin() { return _entities.begin(); }
+    //iterator end() { return _entities.end(); }
+    //size_t size();
 };
-

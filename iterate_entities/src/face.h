@@ -5,15 +5,10 @@
 class Face : public DrawingElement {
 
 public:
-    Face() {}
-    Face(SUFaceRef f) : m_ref(f),
-        DrawingElement(SUFaceToDrawingElement(f))
-        {}
-
-    std::string type_name() const {
-        return "Face";
-    }
-
+    Face();
+    Face(SUFaceRef);
+    std::string type_name() const;
+    ~Face();
 private:
     SUFaceRef m_ref;
 };

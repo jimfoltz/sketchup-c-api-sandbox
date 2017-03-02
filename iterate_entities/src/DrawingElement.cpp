@@ -5,8 +5,8 @@ DrawingElement::DrawingElement()
 {
 }
 
-DrawingElement::DrawingElement(SUDrawingElementRef r) :
-    Entity(SUDrawingElementToEntity(r)), m_ref(r)
+DrawingElement::DrawingElement(SUDrawingElementRef ref) :
+    Entity(SUDrawingElementToEntity(ref)), m_ref(ref)
 {
 }
 

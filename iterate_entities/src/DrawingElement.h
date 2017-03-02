@@ -1,9 +1,9 @@
 #pragma once
 
+#include <SketchUpAPI\sketchup.h>
 #include "entity.h"
 
-class DrawingElement :
-    public Entity
+class DrawingElement : public Entity
 {
 public:
     DrawingElement();

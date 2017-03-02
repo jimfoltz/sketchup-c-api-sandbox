@@ -1,8 +1,9 @@
 @echo off
+@echo Select:
 
-echo 1. Visual Studio win64
-echo 2. Visual Studio win32
-echo 3. MinGW Makefiles
+echo   1. Visual Studio win64
+echo   2. Visual Studio win32
+echo   3. MinGW Makefiles
 
 set /p generator=
 

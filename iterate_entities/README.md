@@ -1,5 +1,8 @@
 # iterate entities
 
+## Example
+
+See the [main.cpp](src/main.cpp) file for example.
 
 ## Build the Build
 

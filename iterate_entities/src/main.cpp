@@ -1,53 +1,58 @@
 #include <SketchUpAPI/sketchup.h>
 #include <iostream>
-#include <ostream>
 #include <string>
-//#include <unordered_map>
-#include <vector>
-//#include <cassert>
-//#include <algorithm>
-#include <iterator> // ostream_inserter
-#include <sstream>
-//#include "type_name.h"
+#include <io.h>
 #include "output_sketchup_error.h"
 #include "model.h"
 
 //#include "funcs.h"
 
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-  using std::cout;
-  using std::endl;
+    using std::cout;
+    using std::endl;
 
-  if (argc != 2) {
-    std::cout << "Usage: main.exe filename.skp" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::string filename = argv[1];
+    if (argc != 2)
+    {
+        std::cout << "Usage: main.exe filename.skp" << std::endl;
+        return EXIT_FAILURE;
+    }
+    std::string filename = argv[1];
+    if (_access(filename.c_str(), 0))
+    {
+        cout << "Did not find file " << filename << endl;
+        return EXIT_FAILURE;
+    }
+    SUInitialize();
 
-  SUInitialize();
+    auto model = Model::create(filename);
+    cout << model.version() << std::endl;
 
-  auto model = Model::create(filename);
-  cout << model.version() << std::endl;
+    // get the Entities object
+    auto entities{ model.entities() };
 
-  auto ents = model.entities();
+    // get a list of all Entity objects
+    auto all_ents{ entities.all() };
 
-  auto faces = ents.faces();
-  cout << "Faces: " << faces.size() << endl;
+    // List all entities
+    for (auto &e : all_ents) {
+        cout << e << endl;
+    }
 
-  auto edges = ents.edges();
-  cout << "Edges: " << edges.size() << endl;
+    // List only Faces
+    cout << "Faces:\n";
+    for (auto& face : entities.faces()) {
+        cout << face << endl;
+    }
 
-  for (const auto& face : faces)  {
-      cout << face << endl;
-  }
+    cout << "Entities size: " << all_ents.size() << endl;
 
-  for (const auto& edge : edges) {
-      cout << edge << endl;
-  }
+    cout << "\nModel Stats:" << endl;
+    auto stats = model.stats();
+    for (auto& elem : stats) {
+        cout << elem.first << " : " << elem.second << endl;
+    }
 
-  SUTerminate();
-  return 0;
-
+    SUTerminate();
+    return EXIT_SUCCESS;
 }
