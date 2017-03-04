@@ -3,7 +3,6 @@
 #include "DrawingElement.h"
 
 class Face : public DrawingElement {
-
 public:
     Face();
     Face(SUFaceRef);

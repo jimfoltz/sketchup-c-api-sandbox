@@ -7,6 +7,8 @@
 
 //#include "funcs.h"
 
+
+
 int main(int argc, char *argv[])
 {
     using std::cout;
@@ -45,6 +47,11 @@ int main(int argc, char *argv[])
         cout << face << endl;
     }
 
+    auto groups{ entities.groups() };
+    for (auto& group : groups) {
+        cout << group << endl;
+    }
+
     cout << "Entities size: " << all_ents.size() << endl;
 
     cout << "\nModel Stats:" << endl;
@@ -53,6 +60,14 @@ int main(int argc, char *argv[])
         cout << elem.first << " : " << elem.second << endl;
     }
 
+    //cout << "Group Count: " << entities.get_count(&SUEntitiesGetNumGroups) << endl;
+
+    std::vector<Face> f{
+        entities.get1<Face, SUFaceRef>(SUEntitiesGetNumFaces, SUEntitiesGetFaces)
+    };
+    for (auto& a : f) {
+        cout << a << "\n";
+    }
     SUTerminate();
     return EXIT_SUCCESS;
 }

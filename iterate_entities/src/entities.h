@@ -6,6 +6,8 @@
 #include "model.h"
 #include "face.h"
 #include "edge.h"
+#include "ComponentInstance.h"
+#include "Group.h"
 
 
 class Entities {
@@ -13,15 +15,16 @@ private:
     SUEntitiesRef _ref;
     SUModelRef model_ref;
     typedef std::vector<Entity> EntityList;
-    void fill_faces(EntityList&);
-    void fill_edges(EntityList&);
+    
 
 public:
 
     Entities(SUModelRef m);
-    //EntityList _entities;
+    EntityList _entities;
     std::vector<Face> faces() const;
     std::vector<Edge> edges() const;
+    std::vector<ComponentInstance> instances() const;
+    std::vector<Group> groups() const;
 
     // 
     EntityList all();
@@ -30,4 +33,11 @@ public:
     //iterator begin() { return _entities.begin(); }
     //iterator end() { return _entities.end(); }
     //size_t size();
+
+
+    template<typename T, typename T2>
+    std::vector<T> get1(SU_RESULT(&f)(SUEntitiesRef, size_t*), SU_RESULT(&f2)(SUEntitiesRef, size_t, T2[], size_t*)) const;
+
 };
+
+
