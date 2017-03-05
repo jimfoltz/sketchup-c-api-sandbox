@@ -1,0 +1,5 @@
+*.exe
+*.dll
+Session.vim
+*.skp
+*.skb
