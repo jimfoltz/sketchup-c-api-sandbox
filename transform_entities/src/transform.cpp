@@ -1,11 +1,5 @@
-#include <SketchUpAPI/slapi.h>
-#include <SketchUpAPI/geometry.h>
-#include <SketchUpAPI/initialize.h>
-#include <SketchUpAPI/model/model.h>
-#include <SketchUpAPI/model/entities.h>
-#include <SketchUpAPI/model/face.h>
-#include <SketchUpAPI/model/edge.h>
-#include <SketchUpAPI/model/vertex.h>
+#include <SketchUpAPI/sketchup.h>
+
 #include <vector>
 
 std::vector<SUEntityRef> get_edges(SUEntitiesRef entities)
