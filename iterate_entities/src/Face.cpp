@@ -3,7 +3,7 @@
 Face::Face() {}
 
 Face::Face(SUFaceRef f) :
-    m_ref(f),
+    _ref(f),
     DrawingElement(SUFaceToDrawingElement(f))
 {}
 

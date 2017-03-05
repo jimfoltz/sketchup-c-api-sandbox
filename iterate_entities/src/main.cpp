@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     if (argc != 2)
     {
-        std::cout << "Usage: main.exe filename.skp" << std::endl;
+        cout << "Usage: main.exe filename.skp\n";
         return EXIT_FAILURE;
     }
     std::string filename = argv[1];
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     SUInitialize();
 
     auto model = Model::create(filename);
-    cout << model.version() << std::endl;
+    cout << model.version() << "\n";
 
     // get the Entities object
     auto entities{ model.entities() };
@@ -37,8 +37,16 @@ int main(int argc, char *argv[])
     auto all_ents{ entities.all() };
 
     // List all entities
+    cout << "All Entities:\n";
     for (auto &e : all_ents) {
         cout << e << endl;
+    }
+    cout << "--\n";
+
+    // Edges
+    cout << "Edges:\n";
+    for (auto& edge : entities.edges()) {
+        cout << edge << "\n";
     }
 
     // List only Faces
@@ -52,6 +60,16 @@ int main(int argc, char *argv[])
         cout << group << endl;
     }
 
+    cout << "Guide Points:\n";
+    for (auto& gp : entities.guide_points()) {
+        cout << gp << "\n";
+    }
+
+    cout << "Guide Lines:\n";
+    for (auto& gl : entities.guide_lines()) {
+        cout << gl << "\n";
+    }
+
     cout << "Entities size: " << all_ents.size() << endl;
 
     cout << "\nModel Stats:" << endl;
@@ -60,14 +78,6 @@ int main(int argc, char *argv[])
         cout << elem.first << " : " << elem.second << endl;
     }
 
-    //cout << "Group Count: " << entities.get_count(&SUEntitiesGetNumGroups) << endl;
-
-    std::vector<Face> f{
-        entities.get1<Face, SUFaceRef>(SUEntitiesGetNumFaces, SUEntitiesGetFaces)
-    };
-    for (auto& a : f) {
-        cout << a << "\n";
-    }
     SUTerminate();
     return EXIT_SUCCESS;
 }

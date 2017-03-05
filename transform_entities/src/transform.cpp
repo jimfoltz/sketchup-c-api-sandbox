@@ -1,23 +1,20 @@
 #include <SketchUpAPI/sketchup.h>
-
+#include <iostream>
 #include <vector>
+#include "../../utilities/sketchup_error_string.h"
 
 std::vector<SUEntityRef> get_edges(SUEntitiesRef entities)
 {
     size_t amount{ 0 };
+    std::vector<SUEntityRef> ents{};
     SUEntitiesGetNumEdges(entities, false, &amount);
-    if (amount > 0) {
-        size_t count{ 0 };
-        std::vector<SUEdgeRef> edges(amount);
-        SUEntitiesGetEdges(entities, false, amount, &edges[0], &count);
-        if (count > 0) {
-            std::vector<SUEntityRef> ents{};
-            for (auto& edge : edges) {
-                ents.push_back(SUEdgeToEntity(edge));
-            }
-            return ents;
-        }
+    size_t count{ 0 };
+    std::vector<SUEdgeRef> edges(amount);
+    SUEntitiesGetEdges(entities, false, amount, &edges[0], &count);
+    for (auto& edge : edges) {
+        ents.push_back(SUEdgeToEntity(edge));
     }
+    return ents;
 }
 
 int main()
@@ -56,13 +53,17 @@ int main()
     SUTransformation tr{ 0.0, 1.0, 0.0, 0.0, -1.0, 0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 };
     std::vector<SUEntityRef> edges{ get_edges(entities) };
     res = SUEntitiesTransform(entities, edges.size(), &edges[0], &tr);
+    std::cout << sketchup_error_string(res, __FILE__, __LINE__) << "\n";
     //_RPT1(_CRT_WARN, "%s", res);
 
     // Save the in-memory model to a file
-    SUModelSaveToFile(model, "new_model.skp");
+    res = SUModelSaveToFile(model, "new_model.skp");
+    _ASSERTE(res == SU_ERROR_NONE);
+    std::cout << sketchup_error_string(res, __FILE__, __LINE__) << "\n";
     // Must release the model or there will be memory leaks
     SUModelRelease(&model);
     // Always terminate the API when done using it
     SUTerminate();
     return 0;
+    //std::cout << __LINE__ << "\n";
 }

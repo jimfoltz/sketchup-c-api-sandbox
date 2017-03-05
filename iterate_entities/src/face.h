@@ -9,6 +9,6 @@ public:
     std::string type_name() const;
     ~Face();
 private:
-    SUFaceRef m_ref;
+    SUFaceRef _ref;
 };
 

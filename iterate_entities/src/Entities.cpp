@@ -38,6 +38,8 @@ template<typename T, typename T2>
     return list;
 }
 
+ // edges() is special because it takes a boolean parameter
+ // in the middle of the "typical" parameters.
 std::vector<Edge> Entities::edges() const
 {
     std::vector<Edge> list(0);
@@ -59,7 +61,7 @@ std::vector<Edge> Entities::edges() const
 
 std::vector<Face> Entities::faces() const
 {
-    return this->get1<Face, SUFaceRef>(SUEntitiesGetNumFaces, SUEntitiesGetFaces);
+    return get1<Face, SUFaceRef>(SUEntitiesGetNumFaces, SUEntitiesGetFaces);
 }
 
 std::vector<ComponentInstance> Entities::instances() const {
@@ -68,4 +70,14 @@ std::vector<ComponentInstance> Entities::instances() const {
 
 std::vector<Group> Entities::groups() const {
     return this->get1<Group, SUGroupRef>(SUEntitiesGetNumGroups, SUEntitiesGetGroups);
+}
+
+std::vector<GuidePoint> Entities::guide_points() const
+{
+    return this->get1<GuidePoint, SUGuidePointRef>(SUEntitiesGetNumGuidePoints, SUEntitiesGetGuidePoints);
+}
+
+std::vector<GuideLine> Entities::guide_lines() const
+{
+    return this->get1<GuideLine, SUGuideLineRef>(SUEntitiesGetNumGuideLines, SUEntitiesGetGuideLines);
 }

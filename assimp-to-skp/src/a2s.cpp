@@ -7,14 +7,13 @@
 #include <assimp/postprocess.h>
 #include <assimp/DefaultLogger.hpp>
 
-#include "output_sketchup_error.h"
+#include "../../utilities/sketchup_error_string.h"
 
 // #define SU_CALL(func) if ((func) != SU_ERROR_NONE) throw std::exception()
 
 // Quick debugging
 #define CHECK(r) if (r != SU_ERROR_NONE) { \
-	std::cout << "SU Error line: " << __LINE__ << "\n"; \
-	output_sketchup_error(r); return 1; }
+	std::cout << "SU Error line: " << __LINE__ << sketchup_error_string(r); return 1; }
 
 int main(int argc, char *argv[]) {
 
@@ -102,14 +101,14 @@ int main(int argc, char *argv[]) {
       aiFace *faces = mesh->mFaces;
       unsigned int v_i;
       int c = 0;
-      for (size_t i = 0; i < face_count; i++) 
+      for (size_t i = 0; i < face_count; i++)
       {
          // std::cout << "Face " << i << " has " << faces[i].mNumIndices << " vertices.\n";
 
          // Create a Loop for each face
          res = SULoopInputCreate(&outer_loop);
 
-         for (size_t j = 0; j < faces[i].mNumIndices; j++) 
+         for (size_t j = 0; j < faces[i].mNumIndices; j++)
          {
             v_i = faces[i].mIndices[j];
             // std::cout << v_i << " ";

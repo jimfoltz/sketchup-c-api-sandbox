@@ -1,0 +1,54 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+1
+Microsoft (R) Build Engine version 14.0.23107.0
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 3/5/2017 8:27:59 AM.
+Project "C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.InvalidPlatform.Targets(22,7): error MSB8007: The Platform for project 'CompilerIdC.vcxproj' is invalid.  Platform='win64'. You may be seeing this message because you are trying to build a project without a solution file, and have specified a non-default Platform that doesn't exist for this project. [C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdC\CompilerIdC.vcxproj]
+Done Building Project "C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdC\CompilerIdC.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdC\CompilerIdC.vcxproj" (default target) (1) ->
+(InvalidPlatformError target) -> 
+  C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.InvalidPlatform.Targets(22,7): error MSB8007: The Platform for project 'CompilerIdC.vcxproj' is invalid.  Platform='win64'. You may be seeing this message because you are trying to build a project without a solution file, and have specified a non-default Platform that doesn't exist for this project. [C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdC\CompilerIdC.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.26
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+1
+Microsoft (R) Build Engine version 14.0.23107.0
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 3/5/2017 8:27:59 AM.
+Project "C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.InvalidPlatform.Targets(22,7): error MSB8007: The Platform for project 'CompilerIdCXX.vcxproj' is invalid.  Platform='win64'. You may be seeing this message because you are trying to build a project without a solution file, and have specified a non-default Platform that doesn't exist for this project. [C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdCXX\CompilerIdCXX.vcxproj]
+Done Building Project "C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdCXX\CompilerIdCXX.vcxproj" (default target) (1) ->
+(InvalidPlatformError target) -> 
+  C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.InvalidPlatform.Targets(22,7): error MSB8007: The Platform for project 'CompilerIdCXX.vcxproj' is invalid.  Platform='win64'. You may be seeing this message because you are trying to build a project without a solution file, and have specified a non-default Platform that doesn't exist for this project. [C:\Users\Jim\SketchUp\_source\jf-sketchup-c-api-sandbox\iterate_entities\b\CMakeFiles\3.7.2\CompilerIdCXX\CompilerIdCXX.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.19
+
+

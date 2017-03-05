@@ -10,7 +10,7 @@ Express for Desktop.
 Set an ENV variable named `SKETCHUP_SDK` where you will find the `headers` and
 `binary` folders of the SketchUp SDK. For me, this is currently:
 
-    C:\Users\Jim\SketchUp\SDK\SDK_Win_x64_17.2.2555
+    > set SKETCHUP_SDK="C:\Users\Jim\SketchUp\SDK\SDK_Win_x64_17.2.2555"
 
 
     md build

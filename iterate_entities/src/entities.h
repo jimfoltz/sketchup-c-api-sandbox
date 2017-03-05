@@ -8,6 +8,8 @@
 #include "edge.h"
 #include "ComponentInstance.h"
 #include "Group.h"
+#include "GuidePoint.h"
+#include "GuideLine.h"
 
 
 class Entities {
@@ -25,6 +27,8 @@ public:
     std::vector<Edge> edges() const;
     std::vector<ComponentInstance> instances() const;
     std::vector<Group> groups() const;
+    std::vector<GuidePoint> guide_points() const;
+    std::vector<GuideLine> guide_lines() const;
 
     // 
     EntityList all();
