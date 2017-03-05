@@ -54,8 +54,7 @@ int main()
     // Transform Face
     SUTransformation tr{ 0.0, 1.0, 0.0, 0.0, -1.0, 0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 };
     std::vector<SUEntityRef> edges{ get_edges(entities) };
-    size_t s{ 4 };
-    res = SUEntitiesTransform(entities, s, &edges[0], &tr);
+    res = SUEntitiesTransform(entities, edges.size(), &edges[0], &tr);
     //_RPT1(_CRT_WARN, "%s", res);
 
     // Save the in-memory model to a file
