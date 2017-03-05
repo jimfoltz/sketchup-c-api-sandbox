@@ -51,7 +51,8 @@ int main()
     // Add the face to the entities
     SUEntitiesAddFaces(entities, 1, &face);
 
-    // Transform Face
+    // Transform Face. 90 degrees around ORIGIN and Z_AXIS.
+    // Use result from Ruby API Geom::Transformation.roation(ORIGIN, Z_AXIS, 90.degrees).to_a
     SUTransformation tr{ 0.0, 1.0, 0.0, 0.0, -1.0, 0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 };
     std::vector<SUEntityRef> edges{ get_edges(entities) };
     res = SUEntitiesTransform(entities, edges.size(), &edges[0], &tr);
