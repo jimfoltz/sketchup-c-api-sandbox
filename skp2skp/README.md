@@ -21,11 +21,11 @@ Looping over all files can be done using the user's shell or command syntax and 
 
 ## Build (Windows)
 
-See the `build.cmd` script. 
+See the `build.cmd` script, or the `Makefile`.
 
 Dependencies:
 * `SketchUpAPI.dll` from the SketchUp 2016 SDK.
-* gcc compiler and toolchain. 
+* gcc compiler and toolchain.
   I am using the [tdm-gcc](http://tdm-gcc.tdragon.net/) compiler suite.
 
 
