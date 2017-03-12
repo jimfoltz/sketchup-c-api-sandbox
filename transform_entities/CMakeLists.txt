@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.7)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include("../SketchUp.cmake")
+include("../cmake/SketchUp.cmake")
 
 file(GLOB SRCS src/*.cpp src/*.h)
 

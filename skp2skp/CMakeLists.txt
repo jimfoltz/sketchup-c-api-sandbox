@@ -1,17 +1,17 @@
 # Comment
 
-project(s2s)
-
 cmake_minimum_required(VERSION 3.3)
 
-math(EXPR BITS "${CMAKE_SIZEOF_VOID_P} * 8")
-message("BITS: " ${BITS})
+project(s2s)
 
-find_path(SKETCHUP_SDK version.txt ../../../SDK/SDK_Win_16-1-1450)
-message("SKETCHUP_SDK: ${SKETCHUP_SDK}")
+math(EXPR BITS "${CMAKE_SIZEOF_VOID_P} * 8")
+message(status "BITS: " ${BITS})
+
+find_path(SKETCHUP_SDK version.txt ../../../SDK/16.1.1450)
+message(status "SKETCHUP_SDK: ${SKETCHUP_SDK}")
 
 find_path(SKETCHUP_INCLUDE_DIR SketchUpAPI/sketchup.h ${SKETCHUP_SDK}/headers)
-message("SKETCHUP_INCLUDE_DIR: ${SKETCHUP_INCLUDE_DIR}")
+message(STATUS "SKETCHUP_INCLUDE_DIR: ${SKETCHUP_INCLUDE_DIR}")
 
 if( BITS EQUAL 64 )
 	find_library(SKETCHUP_LIBRARY sketchupapi.lib ${SKETCHUP_SDK}/binaries/sketchup/x64)
@@ -20,8 +20,8 @@ else()
 	find_library(SKETCHUP_LIBRARY sketchupapi.lib ${SKETCHUP_SDK}/binaries/sketchup/x86)
 	find_file(SKETCHUP_DLL SketchUpAPI.dll ${SKETCHUP_SDK}/binaries/sketchup/x86)
 endif()
-message("SKETCHUP_LIBRARY: ${SKETCHUP_LIBRARY}")
-message("SKETCHUP_DLL: ${SKETCHUP_DLL}")
+message(STATUS "SKETCHUP_LIBRARY: ${SKETCHUP_LIBRARY}")
+message(STATUS "SKETCHUP_DLL: ${SKETCHUP_DLL}")
 
 
 include_directories(${SKETCHUP_INCLUDE_DIR})

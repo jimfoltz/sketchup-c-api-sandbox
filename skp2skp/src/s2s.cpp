@@ -53,7 +53,9 @@ int main(int argc, char *argv[]) {
     {"15", SUModelVersion_SU2015},
     {"2015", SUModelVersion_SU2015},
     {"16", SUModelVersion_SU2016},
-    {"2016", SUModelVersion_SU2016}
+    {"2016", SUModelVersion_SU2016},
+    {"17", SUModelVersion_SU2017},
+    {"2017", SUModelVersion_SU2017}
   };
 
   // Check if opt_version is supported
