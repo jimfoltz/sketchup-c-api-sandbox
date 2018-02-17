@@ -1,23 +1,23 @@
-cmake_minimum_required(VERSION 3.7)
+#cmake_minimum_required(VERSION 3.6)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+#set(CMAKE_CXX_STANDARD 11)
+#set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include("../cmake/SketchUp.cmake")
+#include("../cmake/SketchUp.cmake")
 
 file(GLOB SRCS src/*.cpp src/*.h)
 
 add_executable(transform ${SRCS})
-include_directories(${SKETCHUP_INCLUDE_DIR})
+#include_directories(${SKETCHUP_INCLUDES})
 target_link_libraries(transform ${SKETCHUP_LIBRARY})
 
-if(MSVC)
+#if(MSVC)
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT transform)
+#set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT transform)
 
-add_custom_command(
-   TARGET transform POST_BUILD
-   COMMAND ${CMAKE_COMMAND} -E copy
-   ${SKETCHUP_DLL} $<TARGET_FILE_DIR:transform>)
+#add_custom_command(
+#   TARGET transform POST_BUILD
+#   COMMAND ${CMAKE_COMMAND} -E copy
+#   ${SKETCHUP_DLL} $<TARGET_FILE_DIR:transform>)
 
-endif()
+#endif()

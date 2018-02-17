@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 #include <io.h>
-#include "output_sketchup_error.h"
-#include "model.h"
+#include "utilities/sketchup_error_string.h"
+#include "wrapper/src/Model.h"
 
 //#include "funcs.h"
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     SUInitialize();
 
     auto model = Model::create(filename);
-    cout << model.version() << "\n";
+    cout << model.version_string() << "\n";
 
     // get the Entities object
     auto entities{ model.entities() };

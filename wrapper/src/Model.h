@@ -21,7 +21,7 @@ public:
 
     Entities entities() const;
 
-    std::string version() const;
+    std::string version_string() const;
     std::list < std::pair<std::string, int>> stats();
 
 private:

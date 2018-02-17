@@ -1,7 +1,7 @@
 #include <SketchUpAPI/sketchup.h>
 #include <vector>
 #include <iostream>
-#include <SUWrapper.h>
+#include <wrapper\src\SUWrapper.h>
 
 
 int main(int argc, char *argv[]) {

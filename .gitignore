@@ -1,4 +1,7 @@
-b
-build-*
+.vs/
+b/
+build*/
 *.skp
 *.skb
+.vscode/
+*.bat

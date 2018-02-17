@@ -15,10 +15,10 @@ int main() {
 	SUModelRef model = SU_INVALID;
 	SU_CALL(SUModelCreateFromFile(&model, "C:/Users/Jim/Downloads/issue-19.skp"));
 
-	SUAttributeDictionaryRef ad_ref( SU_INVALID );
+	SUAttributeDictionaryRef ad_ref =  SU_INVALID ;
 	SU_CALL(SUModelGetAttributeDictionary(model, "TypedValues", &ad_ref));
 
-	SUTypedValueRef tv_ref(SU_INVALID );
+	SUTypedValueRef tv_ref = SU_INVALID ;
 	SU_CALL(SUTypedValueCreate(&tv_ref));
 	SU_CALL(SUAttributeDictionaryGetValue(ad_ref, "Array", &tv_ref));
 
@@ -28,7 +28,7 @@ int main() {
 
 	std::vector<SUTypedValueRef> refs(len);
 	SU_CALL(SUTypedValueGetArrayItems(tv_ref, len, &refs[0], &count));
-	SUStringRef s( SU_INVALID );
+	SUStringRef s =  SU_INVALID ;
 	SU_CALL(SUStringCreate(&s));
 	std::vector<std::string> out_v{};
 	for (auto tv : refs) {

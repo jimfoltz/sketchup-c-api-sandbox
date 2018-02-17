@@ -1,7 +1,9 @@
+#include <cassert>
+
 #include <SketchUpAPI/sketchup.h>
 #include <iostream>
 #include <vector>
-#include "../../utilities/sketchup_error_string.h"
+#include "utilities/sketchup_error_string.h"
 
 std::vector<SUEntityRef> get_edges(SUEntitiesRef entities)
 {
@@ -58,7 +60,7 @@ int main()
 
     // Save the in-memory model to a file
     res = SUModelSaveToFile(model, "new_model.skp");
-    _ASSERTE(res == SU_ERROR_NONE);
+    assert(res == SU_ERROR_NONE);
     std::cout << sketchup_error_string(res, __FILE__, __LINE__) << "\n";
     // Must release the model or there will be memory leaks
     SUModelRelease(&model);
