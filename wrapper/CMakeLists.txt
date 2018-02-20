@@ -15,7 +15,7 @@ file(GLOB HEADERS src/*.h)
 #
 add_library(${PROJECT_NAME}  ${SOURCES})
 target_link_libraries(${PROJECT_NAME} ${SKETCHUP_LIBRARY})
-target_include_directories(${PROJECT_NAME} PUBLIC ${SKETCHUP_INCLUDES})
+#target_include_directories(${PROJECT_NAME} PUBLIC ${SKETCHUP_INCLUDES})
 #
 #IF(MSVC)
 #	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})

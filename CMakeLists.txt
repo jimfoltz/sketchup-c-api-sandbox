@@ -7,7 +7,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 include(SketchUp.cmake)
 
-include_directories("." ${SKETCHUP_INCLUDES})
+include_directories("." ${SKETCHUP_INCLUDES} "utilites")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/_bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/_bin")
